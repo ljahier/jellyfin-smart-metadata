@@ -8,6 +8,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <NativeLibraryFile Condition="$([MSBuild]::IsOSPlatform('Linux'))">libjellyfin_smart_metadata.so</NativeLibraryFile>
+    <NativeLibraryFile Condition="$([MSBuild]::IsOSPlatform('OSX'))">libjellyfin_smart_metadata.dylib</NativeLibraryFile>
+    <NativeLibraryFile Condition="$([MSBuild]::IsOSPlatform('Windows'))">jellyfin_smart_metadata.dll</NativeLibraryFile>
+    <NativeLibraryName>jellyfin_smart_metadata-$(NETCoreSdkPortableRuntimeIdentifier)$([System.IO.Path]::GetExtension('$(NativeLibraryFile)'))</NativeLibraryName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +28,15 @@
 
   <ItemGroup>
     <None Include="meta.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="$(MSBuildThisFileDirectory)../target/release/$(NativeLibraryFile)" Link="$(NativeLibraryName)" CopyToOutputDirectory="PreserveNewest" Condition="'$(Configuration)' == 'Release'" />
   </ItemGroup>
+
+  <Target Name="PackagePlugin" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <MakeDir Directories="$(MSBuildThisFileDirectory)../dist" />
+    <ZipDirectory
+        SourceDirectory="$(OutDir)"
+        DestinationFile="$(MSBuildThisFileDirectory)../dist/smart-metadata_$(Version).zip"
+        Overwrite="true" />
+  </Target>
 
 </Project>

@@ -1,5 +1,6 @@
 [tools]
 "cargo:cargo-nextest" = "latest"
+dotnet = "10"
 
 [env]
 RUST_BACKTRACE = "1"
@@ -8,13 +9,17 @@ RUST_BACKTRACE = "1"
 description = "Format all Rust code using nightly rustfmt"
 run = "cargo +nightly fmt --all"
 
+[tasks."fmt:check"]
+description = "Check formatting with nightly rustfmt"
+run = "cargo +nightly fmt --all --check"
+
 [tasks.lint]
 description = "Lint all workspace targets and features with strict warnings"
-run = "cargo clippy --workspace --all-targets --all-features -- -D warnings"
+run = "cargo clippy --locked --workspace --all-targets --all-features -- -D warnings"
 
 [tasks.test]
 description = "Run all tests, including ignored tests, without stopping on failure"
-run = "cargo nextest run --workspace --all-targets --all-features --run-ignored all --no-fail-fast"
+run = "cargo nextest run --locked --workspace --all-targets --all-features --run-ignored all --no-fail-fast"
 
 [tasks.check]
 description = "Type-check all workspace targets and features"
@@ -23,6 +28,15 @@ run = "cargo check --workspace --all-targets --all-features"
 [tasks.build]
 description = "Build all workspace targets and features"
 run = "cargo build --workspace --all-targets --all-features"
+
+[tasks."build:native"]
+description = "Build the native library in release mode"
+run = "cargo build --release --locked"
+
+[tasks.package]
+description = "Build the plugin and its zip for the current platform"
+depends = ["build:native"]
+run = "dotnet build plugin -c Release"
 
 [tasks.ci]
 description = "Run formatting, linting, and tests"
