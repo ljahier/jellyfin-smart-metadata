@@ -1,5 +1,4 @@
 [tools]
-rust = "nightly"
 "cargo:cargo-nextest" = "latest"
 
 [env]
