@@ -1,0 +1,35 @@
+[package]
+name = "jellyfin-smart-metadata"
+version = "0.1.0"
+edition = "2024"
+authors = ["ljahier <lucas.jahier@jahier.dev>"]
+description = "Rust-powered Jellyfin plugin for smarter media identification and metadata matching."
+license = "MPL-2.0"
+
+[dependencies]
+
+[lints.rust]
+warnings = "deny"
+
+[lints.clippy]
+uninlined_format_args = "deny"
+missing_assert_message = "deny"
+self_named_module_files = "deny"
+wildcard_imports = "deny"
+semicolon_outside_block = "deny"
+single_char_lifetime_names = "deny"
+str_to_string = "deny"
+unwrap_used = "deny"
+new_without_default = "allow"
+indexing_slicing = "deny"
+fallible_impl_from = "deny"
+wildcard_enum_match_arm = "deny"
+unneeded_field_pattern = "deny"
+fn_params_excessive_bools = "deny"
+struct_field_names = "allow"
+expect_used = "deny"
+panic = "deny"
+arithmetic_side_effects = "deny"
+as_conversions = "deny"
+undocumented_unsafe_blocks = "deny"
+

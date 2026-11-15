@@ -1,0 +1,34 @@
+[tools]
+rust = "nightly"
+"cargo:cargo-nextest" = "latest"
+
+[env]
+RUST_BACKTRACE = "1"
+
+[tasks.fmt]
+description = "Format all Rust code using nightly rustfmt"
+run = "cargo +nightly fmt --all"
+
+[tasks.lint]
+description = "Lint all workspace targets and features with strict warnings"
+run = "cargo clippy --workspace --all-targets --all-features -- -D warnings"
+
+[tasks.test]
+description = "Run all tests, including ignored tests, without stopping on failure"
+run = "cargo nextest run --workspace --all-targets --all-features --run-ignored all --no-fail-fast"
+
+[tasks.check]
+description = "Type-check all workspace targets and features"
+run = "cargo check --workspace --all-targets --all-features"
+
+[tasks.build]
+description = "Build all workspace targets and features"
+run = "cargo build --workspace --all-targets --all-features"
+
+[tasks.ci]
+description = "Run formatting, linting, and tests"
+depends = ["fmt", "lint", "test"]
+
+[tasks.doc-test]
+description = "Run Rust documentation tests across the workspace"
+run = "cargo test --doc --workspace --all-features"
