@@ -1,0 +1,11 @@
+[
+  {
+    "guid": "3f7a9c1e-5b24-4d8a-a6f0-92c1d7e84b35",
+    "name": "Smart Metadata",
+    "description": "Normalizes unconventional movie file names with a Rust parser so that the existing metadata providers can identify them.",
+    "overview": "Identifies movies with unconventional file names.",
+    "owner": "ljahier",
+    "category": "Metadata",
+    "versions": []
+  }
+]
