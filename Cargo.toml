@@ -1,6 +1,6 @@
 [package]
 name = "jellyfin-smart-metadata"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 authors = ["ljahier <lucas.jahier@jahier.dev>"]
 description = "Rust-powered Jellyfin plugin for smarter media identification and metadata matching."

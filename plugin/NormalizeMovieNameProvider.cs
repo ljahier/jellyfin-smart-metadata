@@ -55,6 +55,7 @@ public sealed class NormalizeMovieNameProvider : ICustomMetadataProvider<Movie>
             new MetadataRefreshOptions(options.DirectoryService)
             {
                 MetadataRefreshMode = MetadataRefreshMode.FullRefresh,
+                ImageRefreshMode = MetadataRefreshMode.FullRefresh,
                 ReplaceAllMetadata = false,
                 ReplaceAllImages = false,
             },
