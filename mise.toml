@@ -38,6 +38,11 @@ description = "Build the plugin and its zip for the current platform"
 depends = ["build:native"]
 run = "dotnet build plugin -c Release"
 
+[tasks.manifest]
+description = "Generate the Jellyfin plugin repository manifest for the zip in dist"
+depends = ["package"]
+run = "cargo run --locked -p xtask -- manifest --repository ljahier/jellyfin-smart-metadata"
+
 [tasks.ci]
 description = "Run formatting, linting, and tests"
 depends = ["fmt", "lint", "test"]

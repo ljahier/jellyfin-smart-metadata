@@ -33,6 +33,6 @@ jobs:
 
       - run: dotnet build plugin -c Release
 
-      - run: md5sum dist/*.zip
+      - run: cargo run --locked -p xtask -- manifest --repository "$GITHUB_REPOSITORY" --tag "$TAG"
 
-      - run: gh release create "$TAG" dist/*.zip --repo "$GITHUB_REPOSITORY" --title "$TAG" --generate-notes
+      - run: gh release create "$TAG" dist/*.zip dist/manifest.json --repo "$GITHUB_REPOSITORY" --title "$TAG" --generate-notes

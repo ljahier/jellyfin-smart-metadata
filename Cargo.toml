@@ -11,10 +11,16 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 
-[lints.rust]
+[lints]
+workspace = true
+
+[workspace]
+members = ["xtask"]
+
+[workspace.lints.rust]
 warnings = "deny"
 
-[lints.clippy]
+[workspace.lints.clippy]
 uninlined_format_args = "deny"
 missing_assert_message = "deny"
 self_named_module_files = "deny"
