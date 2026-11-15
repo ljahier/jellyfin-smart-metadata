@@ -6,6 +6,9 @@ authors = ["ljahier <lucas.jahier@jahier.dev>"]
 description = "Rust-powered Jellyfin plugin for smarter media identification and metadata matching."
 license = "MPL-2.0"
 
+[lib]
+crate-type = ["cdylib", "rlib"]
+
 [dependencies]
 
 [lints.rust]
